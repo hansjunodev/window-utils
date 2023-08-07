@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "window-utils"
+version = "0.1.0"
+description = ""
+authors = ["[name] <--unset>"]
+readme = "README.md"
+packages = [{include = "window_utils"}]
+
+
+[tool.poetry.scripts]
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pywin32 = "^306"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+
+
+[tool.poetry.group.test]
+optional = true
+
+[tool.poetry.group.test.dependencies] 
+pytest = "^7.4.0"
+keyboard = "^0.13.5"
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
