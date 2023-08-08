@@ -74,7 +74,7 @@ def test_get_rect(notepad: Window, paint: Window):
 
 def test_get_bbox(notepad: Window, paint: Window):
     x, y, w, h = (-7, 3, 163, 142)
-    bbox = (x, y, x + w, y + h)
+    bbox = (x, y, w, h)
     notepad.move(x, y, w, h)
     assert notepad.get_bbox() == bbox
 
