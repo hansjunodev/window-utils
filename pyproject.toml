@@ -2,7 +2,7 @@
 name = "window-utils"
 version = "0.1.0"
 description = ""
-authors = ["[name] <--unset>"]
+authors = ["Hans Juno <123650964+hansjunodev@users.noreply.github.com>"]
 readme = "README.md"
 packages = [{include = "window_utils"}]
 
