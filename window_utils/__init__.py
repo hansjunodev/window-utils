@@ -1,3 +1,4 @@
+import time
 from contextlib import contextmanager
 
 import win32com.client
@@ -20,13 +21,11 @@ class Window:
         return win32gui.GetWindowRect(self._hwnd)
 
     def get_bbox(self) -> tuple[int, int, int, int]:
-        rect = win32gui.GetWindowRect(self._hwnd)
-        left, top, right, bottom = rect
+        left, top, right, bottom = win32gui.GetWindowRect(self._hwnd)
         return (left, top, right - left, bottom - top)
 
     def get_size(self) -> tuple[int, int]:
-        rect = win32gui.GetWindowRect(self._hwnd)
-        left, top, right, bottom = rect
+        left, top, right, bottom = win32gui.GetWindowRect(self._hwnd)
         return (right - left, bottom - top)
 
     def flash(self) -> None:
@@ -50,12 +49,15 @@ class Window:
                 # Return control to the original window.
                 prev_window.activate(*args, **kwargs)
 
-    def activate(self, force=True, ignore_errors=True) -> bool:
+    def activate(self, force=True, *, ignore_errors=True, wait=True) -> bool:
         try:
             if force:
                 shell = win32com.client.Dispatch("WScript.Shell")
                 shell.SendKeys("%")
             win32gui.SetForegroundWindow(self._hwnd)
+            if wait:
+                while not self.is_active():
+                    time.sleep(0.001)
         except win32gui.error:
             if ignore_errors:
                 return False
